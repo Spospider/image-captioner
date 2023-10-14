@@ -273,3 +273,4 @@ fabric.properties
 
 # End of https://www.gitignore.io/api/python,django,pycharm,jupyternotebook
 
+pretrained/encoder-5-3000.pkl

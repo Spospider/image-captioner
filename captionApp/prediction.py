@@ -7,7 +7,7 @@ from torchvision.models import resnet152
 from torch.nn.utils.rnn import pack_padded_sequence
 # from models import EncoderCNN, DecoderRNN
 
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+device = torch.device("cpu")# torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
 class Vocabulary(object):

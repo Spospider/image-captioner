@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
+import os
 import copy
 from .forms import FileForm
 from .models import File
@@ -16,7 +17,7 @@ class CustomUnpickler(pickle.Unpickler):
         return super().find_class(module, name)
 
 
-vocab = CustomUnpickler(open('/home/harshit/Downloads/vocab.pkl', 'rb')).load()
+vocab = CustomUnpickler(open('D:/Repos/image-captioner/pretrained/vocab.pkl', 'rb')).load()
 
 
 def handle_file(image):
@@ -29,6 +30,7 @@ def handle_file(image):
 def index(request):
     """homepage"""
     if request.method == 'POST':
+        # print(os.getcwd(),)
         form = FileForm(request.POST, request.FILES)
         if form.is_valid():
             myfile = File(file=request.FILES['file'])
@@ -39,8 +41,8 @@ def index(request):
             handle_file(myfile)
             # process image
             output = process(file_name,
-                             '/home/harshit/Downloads/pretrained_model/encoder-5-3000.pkl',
-                             '/home/harshit/Downloads/pretrained_model/decoder-5-3000.pkl',
+                             'D:/Repos/image-captioner/pretrained/encoder-5-3000.pkl',
+                             'D:/Repos/image-captioner/pretrained/decoder-5-3000.pkl',
                              vocab,
                              256, 512, 1)
             print(output)
